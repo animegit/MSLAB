@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu
+  namespace: usn
+spec:
+  containers:
+    - name: ubuntu
+      image: ubuntu
+      command: ["sh", "-c", "echo Lakshay"]
+
+
+kubectl apply -f 1.yaml
+kubectl logs ubuntu –-namespace=usn
+kubectl delete pod ubuntu –namespace=usn

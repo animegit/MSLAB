@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: ubuntu1
+  namespace: usn
+spec: 
+  containers:
+    - name: ubuntu1
+      image: ubuntu
+      env:
+        - name : GREETING
+          value: "Good Morning"
+      command: ["echo", "$(GREETING)"]
+
+
+kubectl apply -f 5.yaml
+kubectl logs ubuntu1 –-namespace=usn
+kubectl delete pod ubuntu1 –namespace=usn

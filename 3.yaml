@@ -1,0 +1,7 @@
+kubectl run usn-nginx1 --image=nginx --restart=Never --labels=app=usn-v1 --namespace=usn
+kubectl run usn-nginx2 --image=nginx --restart=Never --labels=app=usn-v1 --namespace=usn
+kubectl run usn-nginx3 --image=nginx --restart=Never --labels=app=usn-v1 --namespace=usn
+
+kubectl get po --show-labels --namespace=usn
+kubectl get po -l app=usn-v1 --namespace=usn
+kubectl label po usn-nginx1 usn-nginx2 usn-nginx3 app- --namespace=usn

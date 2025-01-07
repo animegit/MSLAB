@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: manypods
+  namespace : usn
+spec:
+  containers:
+    - name : c01
+      image: nginx
+      ports: 
+        - containerPort: 80
+
+kubectl apply -f pod1_nw.yml
+kubectl apply -f pod2_nw.yml
+
+kubectl describe pod manypods2 --namespace usn
+
+kubectl exec --namespace usn manypods1 -it -c c00 -- /bin/bash
+
+apt update
+apt install curl
+curl <tespod2_ip>:80
+
+kubectl exec --namespace usn manypods2 -it -c c03 -- /bin/bash
+apt update
+apt install curl
+curl <testpod1_ip>:80

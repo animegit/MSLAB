@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: usn-nginx-deployment
+  namespace : usn
+  labels:
+    app: usn-nginx
+spec:
+  replicas: 3
+  selector :
+    matchLabels:
+      app:  usn-nginx
+    template:
+      metadata:
+        labels:
+          app: usn-nginx
+      spec :
+        containers:
+          - name: usn-nginx
+            image : nginx
+            port :
+              - containerPort: 80 
+
+
+kubectl set image deployment/usn-nginx-deployment nginx=newImageusn --namespace=usn
+kubectl describe deploy usn-nginx-deployment --namespace=usn | grep newImageusn

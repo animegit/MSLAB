@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: usn-nginx-deployment
+  namespace: usn
+  labels: 
+    app: usn-nginx
+spec: 
+  replicas: 3
+  selector:
+    matchLabels:
+      app: usn-nginx
+  template:
+    metadata:
+      labels: 
+        app: usn-nginx
+    spec: 
+      containers :
+        - name: nginx
+          image: nginx
+          ports :
+            - containerPort: 80
+
+
+kubectl create namespace usn
+
+kubectl apply -f 1.yaml
+
+kubectl get pods --namespace=usn
+
+kubectl expose deployment usn-nginx-deployment --type=NodePort --name=usn-nginx-service --namespace=usn
+
+kubectl get svc --namespace=usn
+
+http://172.1.14.168:<NodePort>
